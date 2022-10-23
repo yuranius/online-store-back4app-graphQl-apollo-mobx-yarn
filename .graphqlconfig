@@ -1,0 +1,16 @@
+{
+  "name": "online-store",
+  "schemaPath": "project_schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "Remote GraphQL Endpoint": {
+        "url": "https://parseapi.back4app.com/graphql",
+        "headers": {
+          "X-Parse-Application-Id": "kkWwjLM6jwGw4cW1VeN7NoLuuAWWCcQOT3nwfcZD",
+          "X-Parse-Javascript-Key": "F41sCleZ0JFerYg6Kjg4zHU94Fk0hmGAu3yI6VW7"
+        },
+        "introspect": true
+      }
+    }
+  }
+}
