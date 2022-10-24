@@ -27,7 +27,7 @@ const Shop = observer(() => {
 				name: node.name,
 				brandId: node.brandId.objectId,
 				typeId: node.typeId.objectId,
-				img: node.img.url,
+				img: node.img,
 				rating: node.rating,
 				price: node.price,
 			}))

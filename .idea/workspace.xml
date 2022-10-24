@@ -1,64 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fc0a7de2-ba99-4b5e-8509-1878495e79aa" name="Changes" comment="home initial">
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/online-store-back4app-graphQl-apollo-mobx-yarn.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/logo192.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/logo512.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/manifest.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/robots.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/AppRouter.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/BasketDeviceItem.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/BasketDeviceList.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/BrandBar.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Custom/Accordion.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Custom/Loader.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Custom/Paginator.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Custom/Toasts.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/DeviceItem.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/DeviceList.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Modals/CreateBrand.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Modals/CreateDevice.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Modals/CreateRating.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Modals/CreateType.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Navbar.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/TypeBar.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hooks/useMassage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/http/basketAPI.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/http/deviceAPI.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/http/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/http/userApi.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/images/basket.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/images/bigstar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/images/delete.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/images/delete1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/images/edit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/images/star.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Admin.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Auth.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Basket.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/DevicePage.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Shop.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/BasketStore.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/DeviceStore.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/UserStore.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/consts.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/formatter.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+    <list default="true" id="fc0a7de2-ba99-4b5e-8509-1878495e79aa" name="Changes" comment="home">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_schema.graphql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GetAllTypes.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/src/query/parseFile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Modals/CreateDevice.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Modals/CreateDevice.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Shop.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Shop.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/query/deviceAPI.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/query/deviceAPI.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/DeviceStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/DeviceStore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,8 +75,17 @@
       <workItem from="1666434836519" duration="450000" />
       <workItem from="1666435381803" duration="20500000" />
       <workItem from="1666502418460" duration="11459000" />
-      <workItem from="1666538019851" duration="11501000" />
+      <workItem from="1666538019851" duration="11574000" />
+      <workItem from="1666625543250" duration="8152000" />
     </task>
+    <task id="LOCAL-00001" summary="home initial">
+      <created>1666550306561</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1666550306561</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -142,7 +104,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="home initial" />
-    <option name="LAST_COMMIT_MESSAGE" value="home initial" />
+    <MESSAGE value="home" />
+    <option name="LAST_COMMIT_MESSAGE" value="home" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

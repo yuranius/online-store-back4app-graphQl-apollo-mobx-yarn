@@ -5,7 +5,8 @@ import {createDevice, fetchBrands, fetchTypes} from "../../http/deviceAPI";
 import {observer} from "mobx-react-lite";
 import Toasts from "../Custom/Toasts";
 import {useMutation, useQuery} from "@apollo/client";
-import {CREATE_DEVICE, CREATE_FILE, CREATE_TYPE, FETCH_TYPES_BRANDS_DEVICES} from "../../query/deviceAPI";
+import {CREATE_DEVICE, CREATE_FILE, CREATE_INFO, CREATE_TYPE, FETCH_TYPES_BRANDS_DEVICES} from "../../query/deviceAPI";
+import {parseFile} from "../../query/parseFile";
 
 
 
@@ -32,7 +33,6 @@ const CreateDevice = observer(({show,onHide}) => {
 
     const selectFile = (e) => {
         setFile(e.target.files[0])
-        
     }
 
     const changeInfo = (key, value, number) => {
@@ -40,12 +40,12 @@ const CreateDevice = observer(({show,onHide}) => {
     }
 
     const [crFile] = useMutation(CREATE_FILE)
-    
-    
-
 
     
     const [ newDevice ] = useMutation(CREATE_DEVICE)
+
+    const [newInfo] = useMutation(CREATE_INFO)
+
     const { refetch } = useQuery(FETCH_TYPES_BRANDS_DEVICES)
 
     const addDevice = async () => {
@@ -57,22 +57,39 @@ const CreateDevice = observer(({show,onHide}) => {
         }).then( (t) => t.data.createFile.fileInfo.url)
 
 
-        newDevice({
+
+        let createdDevice = await newDevice({
             variables: {
                 name: name,
                 price: price,
-                file: linkFile,
+                img: linkFile,
                 brandId: device.selectedBrand.id,
                 typeId: device.selectedType.id,
                 rating: 0
             }
-        }).then( () => {
+        }).then( (data) => {
             refetch()
             onHide()
+            return data.data.createDevice.device
         })
+        
+        console.log( '📌:',createdDevice.objectId,'🌴 🏁')
+        
+
+        {info && info.map( el => {
+            newInfo({
+                variables: {
+                    title: el.title,
+                    description: el.description,
+                    deviceId: createdDevice.objectId
+                }
+            })
+        })}
     }
 
 
+    console.log( '📌:',info,'🌴 🏁')
+    
 
 
     // const addDevice = async () => {

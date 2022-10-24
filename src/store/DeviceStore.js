@@ -22,10 +22,6 @@ class UserStore {
         this._types = types
     }
 
-    addTypes (type) {
-        this._types = [...this._types, type]
-    }
-
     setBrands (brands) {
         this._brands = brands
     }

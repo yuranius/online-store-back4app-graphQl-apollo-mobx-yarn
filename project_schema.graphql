@@ -29,7 +29,7 @@ interface SchemaField {
 }
 
 "Use Inline Fragment on Array to get results: https://graphql.org/learn/queries/#inline-fragments"
-union ArrayResult = Basket | Basket_Devices | Brand | Device | Device_info | Element | Ratings | Role | Type | User
+union ArrayResult = Basket | Basket_Devices | Brand | Device | Device_info | Element | Ratings | Role | Session | Type | User
 
 "Current access control list of the current object."
 type ACL {
@@ -204,6 +204,12 @@ type CreateRolePayload {
     role: Role!
 }
 
+type CreateSessionPayload {
+    clientMutationId: String
+    "This is the created object."
+    session: Session!
+}
+
 type CreateTypePayload {
     clientMutationId: String
     "This is the created object."
@@ -264,6 +270,12 @@ type DeleteRolePayload {
     role: Role!
 }
 
+type DeleteSessionPayload {
+    clientMutationId: String
+    "This is the deleted object."
+    session: Session!
+}
+
 type DeleteTypePayload {
     clientMutationId: String
     "This is the deleted object."
@@ -286,7 +298,7 @@ type Device implements Node & ParseObject {
     "The ID of an object"
     id: ID!
     "This is the object img."
-    img: FileInfo!
+    img: String
     "This is the object name."
     name: String
     "This is the object id."
@@ -416,6 +428,8 @@ type Mutation {
     createRatings(input: CreateRatingsInput!): CreateRatingsPayload
     "The createRole mutation can be used to create a new object of the Role class."
     createRole(input: CreateRoleInput!): CreateRolePayload
+    "The createSession mutation can be used to create a new object of the Session class."
+    createSession(input: CreateSessionInput!): CreateSessionPayload
     "The createType mutation can be used to create a new object of the Type class."
     createType(input: CreateTypeInput!): CreateTypePayload
     "The createUser mutation can be used to create a new object of the User class."
@@ -436,6 +450,8 @@ type Mutation {
     deleteRatings(input: DeleteRatingsInput!): DeleteRatingsPayload
     "The deleteRole mutation can be used to delete an object of the Role class."
     deleteRole(input: DeleteRoleInput!): DeleteRolePayload
+    "The deleteSession mutation can be used to delete an object of the Session class."
+    deleteSession(input: DeleteSessionInput!): DeleteSessionPayload
     "The deleteType mutation can be used to delete an object of the Type class."
     deleteType(input: DeleteTypeInput!): DeleteTypePayload
     "The deleteUser mutation can be used to delete an object of the User class."
@@ -468,6 +484,8 @@ type Mutation {
     updateRatings(input: UpdateRatingsInput!): UpdateRatingsPayload
     "The updateRole mutation can be used to update an object of the Role class."
     updateRole(input: UpdateRoleInput!): UpdateRolePayload
+    "The updateSession mutation can be used to update an object of the Session class."
+    updateSession(input: UpdateSessionInput!): UpdateSessionPayload
     "The updateType mutation can be used to update an object of the Type class."
     updateType(input: UpdateTypeInput!): UpdateTypePayload
     "The updateUser mutation can be used to update an object of the User class."
@@ -634,6 +652,28 @@ type Query {
         "These are the conditions that the objects need to match in order to be found."
         where: RoleWhereInput
     ): RoleConnection!
+    "The session query can be used to get an object of the Session class by its id."
+    session(
+        "This is the object id. You can use either the global or the object id."
+        id: ID!,
+        "The read options for the query to be executed."
+        options: ReadOptionsInput
+    ): Session!
+    "The sessions query can be used to find objects of the Session class."
+    sessions(
+        after: String,
+        before: String,
+        first: Int,
+        last: Int,
+        "The read options for the query to be executed."
+        options: ReadOptionsInput,
+        "The fields to be used when sorting the data fetched."
+        order: [SessionOrder!],
+        "This is the number of objects that must be skipped to return."
+        skip: Int,
+        "These are the conditions that the objects need to match in order to be found."
+        where: SessionWhereInput
+    ): SessionConnection!
     "The type query can be used to get an object of the Type class by its id."
     type(
         "This is the object id. You can use either the global or the object id."
@@ -886,6 +926,49 @@ type SendVerificationEmailPayload {
     ok: Boolean!
 }
 
+"The Session object type is used in operations that involve outputting objects of Session class."
+type Session implements Node & ParseObject {
+    ACL: ACL!
+    "This is the date in which the object was created."
+    createdAt: Date!
+    "This is the object createdWith."
+    createdWith: Object
+    "This is the object expiresAt."
+    expiresAt: Date
+    "The ID of an object"
+    id: ID!
+    "This is the object installationId."
+    installationId: String
+    "This is the object id."
+    objectId: ID!
+    "This is the object restricted."
+    restricted: Boolean
+    "This is the object sessionToken."
+    sessionToken: String
+    "This is the date in which the object was las updated."
+    updatedAt: Date!
+    "This is the object user."
+    user: User
+}
+
+"A connection to a list of items."
+type SessionConnection {
+    "This is the total matched objecs count that is returned when the count flag is set."
+    count: Int!
+    "A list of edges."
+    edges: [SessionEdge]
+    "Information to aid in pagination."
+    pageInfo: PageInfo!
+}
+
+"An edge in a connection."
+type SessionEdge {
+    "A cursor for use in pagination"
+    cursor: String!
+    "The item at the end of the edge"
+    node: Session
+}
+
 type SignUpPayload {
     clientMutationId: String
     "This is the new user that was created, signed up and returned as a viewer."
@@ -971,6 +1054,12 @@ type UpdateRolePayload {
     clientMutationId: String
     "This is the updated object."
     role: Role!
+}
+
+type UpdateSessionPayload {
+    clientMutationId: String
+    "This is the updated object."
+    session: Session!
 }
 
 type UpdateTypePayload {
@@ -1187,6 +1276,32 @@ enum RoleOrder {
     updatedAt_DESC
     users_ASC
     users_DESC
+}
+
+"The SessionOrder input type is used when sorting objects of the Session class."
+enum SessionOrder {
+    ACL_ASC
+    ACL_DESC
+    createdAt_ASC
+    createdAt_DESC
+    createdWith_ASC
+    createdWith_DESC
+    expiresAt_ASC
+    expiresAt_DESC
+    id_ASC
+    id_DESC
+    installationId_ASC
+    installationId_DESC
+    objectId_ASC
+    objectId_DESC
+    restricted_ASC
+    restricted_DESC
+    sessionToken_ASC
+    sessionToken_DESC
+    updatedAt_ASC
+    updatedAt_DESC
+    user_ASC
+    user_DESC
 }
 
 "The TypeOrder input type is used when sorting objects of the Type class."
@@ -1552,7 +1667,7 @@ input CreateDeviceFieldsInput {
     "This is the object brandId."
     brandId: BrandPointerInput!
     "This is the object img."
-    img: FileInput!
+    img: String
     "This is the object name."
     name: String
     "This is the object price."
@@ -1624,6 +1739,29 @@ input CreateRoleInput {
     clientMutationId: String
     "These are the fields that will be used to create the new object."
     fields: CreateRoleFieldsInput
+}
+
+"The CreateSessionFieldsInput input type is used in operations that involve creation of objects in the Session class."
+input CreateSessionFieldsInput {
+    ACL: ACLInput
+    "This is the object createdWith."
+    createdWith: Object
+    "This is the object expiresAt."
+    expiresAt: Date
+    "This is the object installationId."
+    installationId: String
+    "This is the object restricted."
+    restricted: Boolean
+    "This is the object sessionToken."
+    sessionToken: String
+    "This is the object user."
+    user: UserPointerInput
+}
+
+input CreateSessionInput {
+    clientMutationId: String
+    "These are the fields that will be used to create the new object."
+    fields: CreateSessionFieldsInput
 }
 
 "The CreateTypeFieldsInput input type is used in operations that involve creation of objects in the Type class."
@@ -1736,6 +1874,12 @@ input DeleteRoleInput {
     id: ID!
 }
 
+input DeleteSessionInput {
+    clientMutationId: String
+    "This is the object id. You can use either the global or the object id."
+    id: ID!
+}
+
 input DeleteTypeInput {
     clientMutationId: String
     "This is the object id. You can use either the global or the object id."
@@ -1793,7 +1937,7 @@ input DeviceWhereInput {
     "This is the object id."
     id: IdWhereInput
     "This is the object img."
-    img: FileWhereInput
+    img: StringWhereInput
     "This is the object name."
     name: StringWhereInput
     "This is the object objectId."
@@ -2333,6 +2477,66 @@ input SendVerificationEmailInput {
     email: String!
 }
 
+"Allow to link OR add and link an object of the Session class."
+input SessionPointerInput {
+    "Create and link an object from Session class."
+    createAndLink: CreateSessionFieldsInput
+    "Link an existing object from Session class. You can use either the global or the object id."
+    link: ID
+}
+
+"Allow to add, remove, createAndAdd objects of the Session class into a relation field."
+input SessionRelationInput {
+    "Add existing objects from the Session class into the relation. You can use either the global or the object ids."
+    add: [ID!]
+    "Create and add objects of the Session class into the relation."
+    createAndAdd: [CreateSessionFieldsInput!]
+    "Remove existing objects from the Session class out of the relation. You can use either the global or the object ids."
+    remove: [ID!]
+}
+
+"The SessionRelationWhereInput input type is used in operations that involve filtering objects of Session class."
+input SessionRelationWhereInput {
+    "Check if the relation/pointer contains objects."
+    exists: Boolean
+    "Run a relational/pointer query where at least one child object can match."
+    have: SessionWhereInput
+    "Run an inverted relational/pointer query where at least one child object can match."
+    haveNot: SessionWhereInput
+}
+
+"The SessionWhereInput input type is used in operations that involve filtering objects of Session class."
+input SessionWhereInput {
+    "This is the object ACL."
+    ACL: ObjectWhereInput
+    "This is the AND operator to compound constraints."
+    AND: [SessionWhereInput!]
+    "This is the NOR operator to compound constraints."
+    NOR: [SessionWhereInput!]
+    "This is the OR operator to compound constraints."
+    OR: [SessionWhereInput!]
+    "This is the object createdAt."
+    createdAt: DateWhereInput
+    "This is the object createdWith."
+    createdWith: ObjectWhereInput
+    "This is the object expiresAt."
+    expiresAt: DateWhereInput
+    "This is the object id."
+    id: IdWhereInput
+    "This is the object installationId."
+    installationId: StringWhereInput
+    "This is the object objectId."
+    objectId: IdWhereInput
+    "This is the object restricted."
+    restricted: BooleanWhereInput
+    "This is the object sessionToken."
+    sessionToken: StringWhereInput
+    "This is the object updatedAt."
+    updatedAt: DateWhereInput
+    "This is the object user."
+    user: UserRelationWhereInput
+}
+
 input SignUpInput {
     clientMutationId: String
     fields: CreateUserFieldsInput
@@ -2495,7 +2699,7 @@ input UpdateDeviceFieldsInput {
     "This is the object brandId."
     brandId: BrandPointerInput
     "This is the object img."
-    img: FileInput
+    img: String
     "This is the object name."
     name: String
     "This is the object price."
@@ -2567,6 +2771,31 @@ input UpdateRoleInput {
     clientMutationId: String
     "These are the fields that will be used to update the object."
     fields: UpdateRoleFieldsInput
+    "This is the object id. You can use either the global or the object id."
+    id: ID!
+}
+
+"The UpdateSessionFieldsInput input type is used in operations that involve creation of objects in the Session class."
+input UpdateSessionFieldsInput {
+    ACL: ACLInput
+    "This is the object createdWith."
+    createdWith: Object
+    "This is the object expiresAt."
+    expiresAt: Date
+    "This is the object installationId."
+    installationId: String
+    "This is the object restricted."
+    restricted: Boolean
+    "This is the object sessionToken."
+    sessionToken: String
+    "This is the object user."
+    user: UserPointerInput
+}
+
+input UpdateSessionInput {
+    clientMutationId: String
+    "These are the fields that will be used to update the object."
+    fields: UpdateSessionFieldsInput
     "This is the object id. You can use either the global or the object id."
     id: ID!
 }

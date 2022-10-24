@@ -7,14 +7,15 @@ import BasketStore from "./store/BasketStore";
 import {ApolloProvider, ApolloClient, InMemoryCache} from "@apollo/client"
 import {createUploadLink} from "apollo-upload-client/public/index";
 
+let token = localStorage.length ? localStorage.getItem('token') : ''
+
 const link = createUploadLink({
   uri: 'https://parseapi.back4app.com/graphql',
-  credentials: "include",
   headers: {
     "X-Parse-Application-Id": "kkWwjLM6jwGw4cW1VeN7NoLuuAWWCcQOT3nwfcZD",
     "X-Parse-Javascript-Key": "F41sCleZ0JFerYg6Kjg4zHU94Fk0hmGAu3yI6VW7",
-    "X-Parse-Session-Token" : localStorage.getItem('token'),
-  }
+    "X-Parse-Session-Token" : token
+  },
 })
 
 export const Context = createContext(null)
@@ -22,6 +23,7 @@ export const Context = createContext(null)
 const client  = new ApolloClient({
   link,
   cache: new InMemoryCache(),
+
 })
 
 

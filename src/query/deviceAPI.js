@@ -28,9 +28,7 @@ export const FETCH_TYPES_BRANDS_DEVICES = gql`
                     brandId {
                         objectId
                     }
-                    img {
-                        url
-                    }
+                    img
                     name
                     price
                     rating
@@ -74,7 +72,7 @@ export const CREATE_BRAND = gql`
 `
 
 export const CREATE_DEVICE = gql`
-    mutation ( $name: String! $price: Float! $rating: Float! $typeId: ID! $brandId: ID! $file: Upload! ) {
+    mutation ( $name: String! $price: Float! $rating: Float! $typeId: ID! $brandId: ID! $img: String! ) {
         createDevice (input: {
             fields: {
                 name: $name
@@ -86,16 +84,14 @@ export const CREATE_DEVICE = gql`
                 brandId: {
                     link: $brandId
                 }
-                img: {upload: $file}
+                img: $img
             }
         }){
             device{
                 objectId
                 name
                 price
-                img {
-                    url
-                }
+                img
             }
         }
     }
@@ -111,28 +107,30 @@ export const CREATE_FILE = gql`
     }
 `
 
-// Создание объекта
+export const CREATE_INFO = gql`
+    mutation ( $title: String! $description: String! $deviceId: ID!) {
+        createDevice_info(input: {
+            fields: {
+                description: $description,
+                title: $title,
+                deviceId: {link: $deviceId}
+            }
+        }){
+            device_info {
+                deviceId {
+                    objectId
+                }
+                title
+                description
+            }
+        }
+    }
+`
 
-// mutation {
-// 	createType (input: {
-// 		fields: {
-// 			name: "Микроволновки"
-// 		}
-// 	}){
-// 		type{
-// 			id
-// 			name
-// 		}
-// 	}
-// }
-
-// query {
-// 	types{
-// 		count
-// 		edges{
-// 			node {
-// 				name
-// 			}
-// 		}
-// 	}
-// }
+export const GET_DEVICE = gql`
+query {
+    device(id: "BdnAyrHMtd"){
+        __typename
+    }
+}
+`
