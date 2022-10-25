@@ -128,9 +128,36 @@ export const CREATE_INFO = gql`
 `
 
 export const GET_DEVICE = gql`
-query {
-    device(id: "BdnAyrHMtd"){
-        __typename
+    query ( $id: ID! ){
+        device_infos (where: {
+            deviceId: {
+                have: {
+                    objectId: {
+                        equalTo: $id
+                    }
+                }
+            }
+        }){
+            edges{
+                node{
+                    objectId
+                    title
+                    description
+                }
+            }
+        }
+        device (id: $id) {
+            objectId
+            img
+            name
+            price
+            rating
+            brandId {
+                objectId
+            }
+            typeId {
+                objectId
+            }
+        }
     }
-}
 `

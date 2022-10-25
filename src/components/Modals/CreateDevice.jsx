@@ -39,24 +39,17 @@ const CreateDevice = observer(({show,onHide}) => {
         setInfo(info.map( i => i.number === number ? {...i, [key]: value} : i))
     }
 
-    const [crFile] = useMutation(CREATE_FILE)
-
-    
+    const [createFile] = useMutation(CREATE_FILE)
     const [ newDevice ] = useMutation(CREATE_DEVICE)
-
     const [newInfo] = useMutation(CREATE_INFO)
-
     const { refetch } = useQuery(FETCH_TYPES_BRANDS_DEVICES)
 
     const addDevice = async () => {
-
-        let linkFile = await crFile({
+        let linkFile = await createFile({
             variables: {
                 file: file
             }
         }).then( (t) => t.data.createFile.fileInfo.url)
-
-
 
         let createdDevice = await newDevice({
             variables: {
@@ -72,9 +65,6 @@ const CreateDevice = observer(({show,onHide}) => {
             onHide()
             return data.data.createDevice.device
         })
-        
-        console.log( '📌:',createdDevice.objectId,'🌴 🏁')
-        
 
         {info && info.map( el => {
             newInfo({
@@ -86,10 +76,6 @@ const CreateDevice = observer(({show,onHide}) => {
             })
         })}
     }
-
-
-    console.log( '📌:',info,'🌴 🏁')
-    
 
 
     // const addDevice = async () => {

@@ -13,6 +13,8 @@ import deleteIcon from '../images/delete.png'
 import {SHOP_ROUTE} from "../utils/consts";
 import {useShowMessageToasts} from "../hooks/useMassage";
 import {priceFormatter} from "../utils/formatter";
+import {useQuery} from "@apollo/client";
+import {GET_DEVICE} from "../query/deviceAPI";
 
 
 const DevicePage = observer(() => {
@@ -31,9 +33,26 @@ const DevicePage = observer(() => {
     // id из адресной строки
     const {id} = useParams()
 
+    const { data } = useQuery(GET_DEVICE, {
+        variables : {
+            id
+        }
+    })
+
     useEffect(() => {
-        fetchOneDevices(id).then(data => setDevice(data))
-    }, [rating,id])
+        setDevice({
+            id: data?.device.objectId,
+            info: data?.device_infos.edges || [],
+            img: data?.device.img,
+            name: data?.device.name,
+            price: data?.device.price,
+            rating: data?.device.rating,
+            brandId: data?.device.brandId.objectId,
+            typeId: data?.device.typeId.objectId,
+        })
+    }, [rating,id, data])
+
+
 
     useEffect(() => {
         if (!!user.user.id && !!device.id)
@@ -108,7 +127,7 @@ const DevicePage = observer(() => {
         <Container className='mt-4'>
             <Row>
                 <Col md={4}>
-                    <Image src={process.env.REACT_APP_API_URL + device.img} width={300} height={300}/>
+                    <Image src={device.img} width={300} height={300}/>
                 </Col>
                 <Col md={4}>
                     <Stack className='d-flex flex-column align-items-center'>
@@ -167,11 +186,11 @@ const DevicePage = observer(() => {
             </Row>
             <Row>
                 <h1>Характеристики</h1>
-                {device.info.map((info, index) =>
-                    <Row key={info.id} style={{
+                {device?.info.map((info, index) =>
+                    <Row key={info.node.objectId} style={{
                         background: index % 2 === 0 ? 'lightgray' : 'transparent',
                         padding: 10
-                    }}> {info.title} : {info.description} </Row>
+                    }}> {info.node.title} : {info.node.description} </Row>
                 )}
             </Row>
             <CreateRating

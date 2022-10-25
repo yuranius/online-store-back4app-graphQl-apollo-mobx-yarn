@@ -3,15 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="fc0a7de2-ba99-4b5e-8509-1878495e79aa" name="Changes" comment="home">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project_schema.graphql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GetAllTypes.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/src/query/parseFile.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Modals/CreateDevice.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Modals/CreateDevice.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Shop.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Shop.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/DevicePage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/DevicePage.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/query/deviceAPI.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/query/deviceAPI.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/DeviceStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/DeviceStore.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,6 +71,7 @@
       <workItem from="1666502418460" duration="11459000" />
       <workItem from="1666538019851" duration="11574000" />
       <workItem from="1666625543250" duration="8152000" />
+      <workItem from="1666720962170" duration="3223000" />
     </task>
     <task id="LOCAL-00001" summary="home initial">
       <created>1666550306561</created>
