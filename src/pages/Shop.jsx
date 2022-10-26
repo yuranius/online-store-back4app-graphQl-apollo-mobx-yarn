@@ -7,39 +7,62 @@ import {observer} from "mobx-react-lite";
 import {Context} from "../index";
 import Paginator from "../components/Custom/Paginator";
 import {useQuery} from "@apollo/client";
-import {FETCH_DEVICES, FETCH_TYPES_BRANDS} from "../query/deviceAPI";
+import {FETCH_COUNT, FETCH_DEVICES, FETCH_TYPES_BRANDS} from "../query/deviceAPI";
 
 const Shop = observer(() => {
 	const {device} = useContext(Context)
 	const {user} = useContext(Context)
 	const {basket} = useContext(Context)
 
-	const {typesAndBrands} = useQuery(FETCH_TYPES_BRANDS)
+	const {data: typesAndBrands} = useQuery(FETCH_TYPES_BRANDS)
 
-	const {data, loading, error} = useQuery(FETCH_DEVICES, {
-		variables: {
-			skip: device.page,
-			limit: device.limit,
-		}
+	const {data: count} = useQuery(FETCH_COUNT,{
+		onCompleted: (data => device.setTotalCount(data.devices.count))
 	})
+
+	const {data: devices} = useQuery(FETCH_DEVICES, {
+
+		variables: {
+			skip: 0,
+			limit: 10,
+			typeId: 'ClPXMDrkj7',
+			//brandId: "sVbUT70Da5",
+		},
+		onCompleted:(data => console.log( '📌:DATA',data,'🌴 🏁')
+		)
+	})
+
+
 
 	useEffect(() => {
 		const types = typesAndBrands?.types.edges.map(({node}) => ({id: node.objectId, name: node.name}))
 		const brands = typesAndBrands?.brands.edges.map(({node}) => ({id: node.objectId, name: node.name}))
-		const devices = data.devices.edges.map(({node}) => ({
-			id: node.objectId,
-			name: node.name,
-			brandId: node.brandId.objectId,
-			typeId: node.typeId.objectId,
-			img: node.img,
-				rating: node.rating,
-				price: node.price,
-			}))
-			device.setDevices(devices)
-			device.setTotalCount(data.devices.count)
-			device.setTypes(types)
-			device.setBrands(brands)
-	}, [data])
+		
+		//console.log( '📌:',data,'🌴 🏁')
+		
+		
+
+		
+		
+		
+		// const devices = data.devices.edges.map(({node}) => ({
+		// 	id: node.objectId,
+		// 	name: node.name,
+		// 	brandId: node.brandId.objectId,
+		// 	typeId: node.typeId.objectId,
+		// 	img: node.img,
+		// 		rating: node.rating,
+		// 		price: node.price,
+		// 	}))
+		// 	device.setDevices(devices)
+		// 	device.setTotalCount(data.devices.count)
+		device.setTypes(types)
+		device.setBrands(brands)
+	}, [typesAndBrands, count, devices])
+	
+	
+	console.log( '📌:',"render",'🌴 🏁')
+	
 
 	useEffect(() => {
 		//fetchTypes().then(data => device.setTypes(data))
@@ -72,14 +95,14 @@ const Shop = observer(() => {
 	return (
 			<Container>
 				<Row className='mt-5'>
-					<Col md={3}>
-						<TypeBar/>
-					</Col>
-					<Col md={9}>
-						<BrandBar/>
-						<DeviceList device={device} brands={device.brands}/>
-						<Paginator/>
-					</Col>
+					{/*<Col md={3}>*/}
+					{/*	<TypeBar/>*/}
+					{/*</Col>*/}
+					{/*<Col md={9}>*/}
+					{/*	<BrandBar/>*/}
+					{/*	<DeviceList device={device} brands={device.brands}/>*/}
+					{/*	<Paginator/>*/}
+					{/*</Col>*/}
 				</Row>
 			</Container>
 	);

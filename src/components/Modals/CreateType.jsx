@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 import {Button, Form, Modal} from "react-bootstrap";
 import {useMutation, useQuery} from "@apollo/client";
-import {CREATE_TYPE, FETCH_TYPES_BRANDS_DEVICES} from "../../query/deviceAPI";
+import {CREATE_TYPE, FETCH_TYPES_BRANDS} from "../../query/deviceAPI";
 
 
 const CreateType = ({show, onHide}) => {
 	const [value, setValue] = useState('')
 
 	const [ newType ] = useMutation(CREATE_TYPE)
-	const { refetch } = useQuery(FETCH_TYPES_BRANDS_DEVICES)
+	const { refetch } = useQuery(FETCH_TYPES_BRANDS)
 
 	const addType = () => {
 		newType({

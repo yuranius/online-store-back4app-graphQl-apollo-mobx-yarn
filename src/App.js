@@ -9,6 +9,7 @@ import {Context} from "./index";
 import Loader from "./components/Custom/Loader";
 import {useQuery} from "@apollo/client";
 import {GET_LOGGED_USER} from "./query/authAPI";
+import Shop from "./pages/Shop";
 
 const App = observer(() => {
 	const {user} = useContext(Context)
@@ -43,12 +44,15 @@ const App = observer(() => {
 
 	return (
 			<Router>
-				<NavBar/>
-				{loading ?
-						<Loader animation={'border'} variant={'primary'}/>
-						:
-						<AppRouter/>
-				}
+				{/*<NavBar/>*/}
+				{/*{loading ?*/}
+				{/*		<Loader animation={'border'} variant={'primary'}/>*/}
+				{/*		:*/}
+				{/*		<AppRouter/>*/}
+				{/*}*/}
+
+				<Shop />
+
 			</Router>
 
 	);

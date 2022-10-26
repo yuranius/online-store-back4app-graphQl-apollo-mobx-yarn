@@ -23,9 +23,19 @@ export const FETCH_TYPES_BRANDS = gql`
     }
 `
 
+export const FETCH_COUNT = gql`
+ query {
+     devices{
+         count
+     }
+ }
+`
+
 export const FETCH_DEVICES = gql`
-    query ( $limit: Int!, $skip: Int! ) {
-        devices (first: $limit , skip: $skip ){
+    query ( $limit: Int!, $skip: Int! $brandId: ID $typeId: ID) {
+        devices ( first: $limit , skip: $skip, where: {OR: {brandId:{have: {objectId: {
+		        equalTo: $brandId
+        }}}}, AND: {typeId: {have: {objectId: {equalTo: $typeId}}}}}){
         count
         edges{
             node{
@@ -45,6 +55,7 @@ export const FETCH_DEVICES = gql`
         }
     }
 `
+
 
 export const CREATE_TYPE = gql`
     mutation ( $name: String! ) {
@@ -180,4 +191,4 @@ export const GET_DEVICE = gql`
 //             }
 //         }
 //     }
-// }
+// } Всем привет, подскажите пожалуйста, я делаю такой запрос. Как мне можно

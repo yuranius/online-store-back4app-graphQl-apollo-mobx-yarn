@@ -2,14 +2,14 @@ import React, {useState} from 'react';
 import {Button, Form, Modal} from "react-bootstrap";
 import {createBrand} from "../../http/deviceAPI";
 import {useMutation, useQuery} from "@apollo/client";
-import {CREATE_BRAND, FETCH_TYPES_BRANDS_DEVICES} from "../../query/deviceAPI";
+import {CREATE_BRAND, FETCH_TYPES_BRANDS,} from "../../query/deviceAPI";
 
 const CreateBrand = ({show,onHide}) => {
     const [value, setValue] = useState('')
 
 
   const [ newBrand ] = useMutation(CREATE_BRAND)
-  const { refetch } = useQuery(FETCH_TYPES_BRANDS_DEVICES)
+  const { refetch } = useQuery(FETCH_TYPES_BRANDS)
 
   const addBrand = () => {
     newBrand({

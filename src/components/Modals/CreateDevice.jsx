@@ -5,7 +5,12 @@ import {createDevice, fetchBrands, fetchTypes} from "../../http/deviceAPI";
 import {observer} from "mobx-react-lite";
 import Toasts from "../Custom/Toasts";
 import {useMutation, useQuery} from "@apollo/client";
-import {CREATE_DEVICE, CREATE_FILE, CREATE_INFO, CREATE_TYPE, FETCH_TYPES_BRANDS_DEVICES} from "../../query/deviceAPI";
+import {
+    CREATE_DEVICE,
+    CREATE_FILE,
+    CREATE_INFO,
+    FETCH_TYPES_BRANDS,
+} from "../../query/deviceAPI";
 import {parseFile} from "../../query/parseFile";
 
 
@@ -42,7 +47,7 @@ const CreateDevice = observer(({show,onHide}) => {
     const [createFile] = useMutation(CREATE_FILE)
     const [ newDevice ] = useMutation(CREATE_DEVICE)
     const [newInfo] = useMutation(CREATE_INFO)
-    const { refetch } = useQuery(FETCH_TYPES_BRANDS_DEVICES)
+    const { refetch } = useQuery(FETCH_TYPES_BRANDS)
 
     const addDevice = async () => {
         let linkFile = await createFile({
