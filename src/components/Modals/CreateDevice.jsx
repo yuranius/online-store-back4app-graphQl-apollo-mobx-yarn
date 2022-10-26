@@ -66,6 +66,7 @@ const CreateDevice = observer(({show,onHide}) => {
             return data.data.createDevice.device
         })
 
+
         {info && info.map( el => {
             newInfo({
                 variables: {

@@ -1,6 +1,6 @@
 import {gql} from "@apollo/client";
 
-export const FETCH_TYPES_BRANDS_DEVICES = gql`
+export const FETCH_TYPES_BRANDS = gql`
     query {
         types{
             count
@@ -20,23 +20,28 @@ export const FETCH_TYPES_BRANDS_DEVICES = gql`
                 }
             }
         }
-        devices {
-            count
-            edges{
-                node{
+    }
+`
+
+export const FETCH_DEVICES = gql`
+    query ( $limit: Int!, $skip: Int! ) {
+        devices (first: $limit , skip: $skip ){
+        count
+        edges{
+            node{
+                objectId
+                brandId {
                     objectId
-                    brandId {
-                        objectId
-                    }
-                    img
-                    name
-                    price
-                    rating
-                    typeId {
-                        objectId
-                    }
+                }
+                img
+                name
+                price
+                rating
+                typeId {
+                    objectId
                 }
             }
+        }
         }
     }
 `
@@ -161,3 +166,18 @@ export const GET_DEVICE = gql`
         }
     }
 `
+
+// query {
+//     devices (first: 5, skip:0, where: {brandId:{have: {objectId: {
+//         equalTo: "sVbUT70Da5"
+//     }}}, typeId:{have: {objectId: {
+//         equalTo: "ClPXMDrkj7" }}}}) {
+//         count
+//         edges {
+//             node{
+//                 name
+//                 price
+//             }
+//         }
+//     }
+// }
