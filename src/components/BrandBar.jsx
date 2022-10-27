@@ -9,20 +9,27 @@ const BrandBar = observer(() => {
 
     const selectedBrand = (id, brand) => {
         if (id === device.selectedBrand.id) {
-            fetchDevices(device.selectedType.id, null, device.page, device.limit).then(data => {
-                device.setDevices(data.rows)
-                device.setTotalCount(data.count)
-            })
+
+
+
+            // fetchDevices(device.selectedType.id, null, device.page, device.limit).then(data => {
+            //     device.setDevices(data.rows)
+            //     device.setTotalCount(data.count)
+            // })
+
+
+
             device.setSelectedBrand({})
         } else {
             device.setSelectedBrand(brand)
         }
     }
 
+
     return (
         <div>
             <Row className='d-flex'>
-                {device.brands.map(brand =>
+                {device.brands?.map(brand =>
                     <Col md={3} key={brand.id}>
                         <Card
                             style={{cursor:"pointer"}}

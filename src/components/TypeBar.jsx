@@ -11,10 +11,13 @@ const TypeBar = observer(() => {
 
     const selectedType = (id, type) => {
         if (id === device.selectedType.id) {
-            fetchDevices(null, device.selectedBrand.id, device.page, device.limit).then(data => {
-                device.setDevices(data.rows)
-                device.setTotalCount(data.count)
-            })
+
+            // fetchDevices(null, device.selectedBrand.id, device.page, device.limit).then(data => {
+            //     device.setDevices(data.rows)
+            //     device.setTotalCount(data.count)
+            // })
+
+
             device.setSelectedType({})
         } else {
             device.setSelectedType(type)
@@ -25,7 +28,7 @@ const TypeBar = observer(() => {
     return (
         <div>
             <ListGroup style={{cursor: "pointer"}}>
-                {device.types.map(type =>
+                {device.types?.map(type =>
                     <ListGroup.Item key={type.id}
                                     onClick={(e) => selectedType(type.id, type)}
                                     active={type.id === device.selectedType.id}

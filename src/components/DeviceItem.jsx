@@ -8,14 +8,13 @@ import {DEVICE_ROUTE} from "../utils/consts";
 
 const DeviceItem = ({device,brands}) => {
     // получаем имя бренда текущего элемента
-    const brand = brands.filter( (brand) => brand.id === device.brandId).map( brand => brand.name)[0]
+    const brand = brands?.filter( (brand) => brand.id === device.brandId).map( brand => brand.name)[0]
     const navigate = useNavigate()
-
     return (
         <Col  md={3} onClick={()=> navigate(DEVICE_ROUTE + '/' + device.id)}>
             <Card
                 border={"light"}
-                style={{width: 150, cursor: "pointer"}}
+                style={{width: 150, cursor: "pointer", marginTop:10}}
             >
                 <Image src={device.img} width={150} height={150}/>
                 <div className='text-black-50 d-flex justify-content-between align-items-center mt-2'>

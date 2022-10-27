@@ -31,7 +31,7 @@ export const FETCH_COUNT = gql`
  }
 `
 
-export const FETCH_DEVICES = gql`
+export const FETCH_DEVICES_WHEN_BRAND_AND_TYPE = gql`
     query ( $limit: Int!, $skip: Int! $brandId: ID $typeId: ID) {
         devices ( first: $limit , skip: $skip, where: {OR: {brandId:{have: {objectId: {
 		        equalTo: $brandId
@@ -56,6 +56,76 @@ export const FETCH_DEVICES = gql`
     }
 `
 
+export const FETCH_DEVICES_WHEN_BRAND = gql`
+    query ( $limit: Int!, $skip: Int! $brandId: ID) {
+        devices ( first: $limit , skip: $skip, where: {brandId:{have: {objectId: {
+            equalTo: $brandId
+        }}}}){
+            count
+            edges{
+                node{
+                    objectId
+                    brandId {
+                        objectId
+                    }
+                    img
+                    name
+                    price
+                    rating
+                    typeId {
+                        objectId
+                    }
+                }
+            }
+        }
+    }
+`
+
+export const FETCH_DEVICES_WHEN_TYPE = gql`
+    query ( $limit: Int!, $skip: Int! $typeId: ID) {
+        devices ( first: $limit , skip: $skip, where: {typeId: {have: {objectId: {equalTo: $typeId}}}}){
+            count
+            edges{
+                node{
+                    objectId
+                    brandId {
+                        objectId
+                    }
+                    img
+                    name
+                    price
+                    rating
+                    typeId {
+                        objectId
+                    }
+                }
+            }
+        }
+    }
+`
+
+export const FETCH_DEVICES = gql`
+    query ( $limit: Int!, $skip: Int!) {
+        devices ( first: $limit , skip: $skip ){
+            count
+            edges{
+                node{
+                    objectId
+                    brandId {
+                        objectId
+                    }
+                    img
+                    name
+                    price
+                    rating
+                    typeId {
+                        objectId
+                    }
+                }
+            }
+        }
+    }
+`
 
 export const CREATE_TYPE = gql`
     mutation ( $name: String! ) {
@@ -191,4 +261,4 @@ export const GET_DEVICE = gql`
 //             }
 //         }
 //     }
-// } Всем привет, подскажите пожалуйста, я делаю такой запрос. Как мне можно
+// }

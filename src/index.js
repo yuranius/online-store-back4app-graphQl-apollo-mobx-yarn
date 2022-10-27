@@ -36,7 +36,7 @@ root.render(
         device: new DeviceStore(),
         basket: new BasketStore(),
       }}>
-        <App />
+        <App  />
       </Context.Provider>
     </ApolloProvider>
 
