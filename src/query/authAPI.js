@@ -24,6 +24,21 @@ export const REGISTRATION = gql`
     }
 `
 
+export const CREATE_BASKET = gql`
+    mutation ($userId: ID!) {
+        createBasket(input: {fields: {userId: {link: $userId}}}){
+            basket {
+                objectId
+                userId {
+                    username
+                }
+            }
+        }
+    }
+`
+
+
+
 export const LOGIN = gql`
     mutation LogIn ( $username: String! $password: String! ){
         logIn(input: {
@@ -35,6 +50,7 @@ export const LOGIN = gql`
                     objectId
                     username
                     role
+                    
                 }
                 sessionToken
             }

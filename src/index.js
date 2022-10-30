@@ -4,7 +4,7 @@ import App from './App';
 import UserStore from "./store/UserStore";
 import DeviceStore from "./store/DeviceStore";
 import BasketStore from "./store/BasketStore";
-import {ApolloProvider, ApolloClient, InMemoryCache} from "@apollo/client"
+import {ApolloClient, ApolloProvider, InMemoryCache} from "@apollo/client"
 import {createUploadLink} from "apollo-upload-client/public/index";
 
 let token = localStorage.length ? localStorage.getItem('token') : ''
@@ -23,7 +23,6 @@ export const Context = createContext(null)
 const client  = new ApolloClient({
   link,
   cache: new InMemoryCache(),
-
 })
 
 

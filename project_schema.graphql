@@ -29,7 +29,7 @@ interface SchemaField {
 }
 
 "Use Inline Fragment on Array to get results: https://graphql.org/learn/queries/#inline-fragments"
-union ArrayResult = Basket | Basket_Devices | Brand | Device | Device_info | Element | Ratings | Role | Session | Type | User
+union ArrayResult = Basket | Basket_Device | Brand | Device | Device_info | Element | Rating | Role | Session | Type | User
 
 "Current access control list of the current object."
 type ACL {
@@ -74,39 +74,39 @@ type BasketEdge {
     node: Basket
 }
 
-"The Basket_Devices object type is used in operations that involve outputting objects of Basket_Devices class."
-type Basket_Devices implements Node & ParseObject {
+"The Basket_Device object type is used in operations that involve outputting objects of Basket_Device class."
+type Basket_Device implements Node & ParseObject {
     ACL: ACL!
-    "This is the object basketId."
-    basketId: Basket!
     "This is the date in which the object was created."
     createdAt: Date!
     "This is the object deviceId."
-    deviceId: Device!
+    deviceId: Device
     "The ID of an object"
     id: ID!
     "This is the object id."
     objectId: ID!
     "This is the date in which the object was las updated."
     updatedAt: Date!
+    "This is the object userId."
+    userId: User
 }
 
 "A connection to a list of items."
-type Basket_DevicesConnection {
+type Basket_DeviceConnection {
     "This is the total matched objecs count that is returned when the count flag is set."
     count: Int!
     "A list of edges."
-    edges: [Basket_DevicesEdge]
+    edges: [Basket_DeviceEdge]
     "Information to aid in pagination."
     pageInfo: PageInfo!
 }
 
 "An edge in a connection."
-type Basket_DevicesEdge {
+type Basket_DeviceEdge {
     "A cursor for use in pagination"
     cursor: String!
     "The item at the end of the edge"
-    node: Basket_Devices
+    node: Basket_Device
 }
 
 "The Brand object type is used in operations that involve outputting objects of Brand class."
@@ -156,9 +156,9 @@ type CreateBasketPayload {
     clientMutationId: String
 }
 
-type CreateBasket_DevicesPayload {
+type CreateBasket_DevicePayload {
     "This is the created object."
-    basket_Devices: Basket_Devices!
+    basket_Device: Basket_Device!
     clientMutationId: String
 }
 
@@ -192,10 +192,10 @@ type CreateFilePayload {
     fileInfo: FileInfo!
 }
 
-type CreateRatingsPayload {
+type CreateRatingPayload {
     clientMutationId: String
     "This is the created object."
-    ratings: Ratings!
+    rating: Rating!
 }
 
 type CreateRolePayload {
@@ -228,9 +228,9 @@ type DeleteBasketPayload {
     clientMutationId: String
 }
 
-type DeleteBasket_DevicesPayload {
+type DeleteBasket_DevicePayload {
     "This is the deleted object."
-    basket_Devices: Basket_Devices!
+    basket_Device: Basket_Device!
     clientMutationId: String
 }
 
@@ -258,10 +258,10 @@ type DeleteDevice_infoPayload {
     device_info: Device_info!
 }
 
-type DeleteRatingsPayload {
+type DeleteRatingPayload {
     clientMutationId: String
     "This is the deleted object."
-    ratings: Ratings!
+    rating: Rating!
 }
 
 type DeleteRolePayload {
@@ -412,8 +412,8 @@ type LogOutPayload {
 type Mutation {
     "The createBasket mutation can be used to create a new object of the Basket class."
     createBasket(input: CreateBasketInput!): CreateBasketPayload
-    "The createBasket_Devices mutation can be used to create a new object of the Basket_Devices class."
-    createBasket_Devices(input: CreateBasket_DevicesInput!): CreateBasket_DevicesPayload
+    "The createBasket_Device mutation can be used to create a new object of the Basket_Device class."
+    createBasket_Device(input: CreateBasket_DeviceInput!): CreateBasket_DevicePayload
     "The createBrand mutation can be used to create a new object of the Brand class."
     createBrand(input: CreateBrandInput!): CreateBrandPayload
     "The createClass mutation can be used to create the schema for a new object class."
@@ -424,8 +424,8 @@ type Mutation {
     createDevice_info(input: CreateDevice_infoInput!): CreateDevice_infoPayload
     "The createFile mutation can be used to create and upload a new file."
     createFile(input: CreateFileInput!): CreateFilePayload
-    "The createRatings mutation can be used to create a new object of the Ratings class."
-    createRatings(input: CreateRatingsInput!): CreateRatingsPayload
+    "The createRating mutation can be used to create a new object of the Rating class."
+    createRating(input: CreateRatingInput!): CreateRatingPayload
     "The createRole mutation can be used to create a new object of the Role class."
     createRole(input: CreateRoleInput!): CreateRolePayload
     "The createSession mutation can be used to create a new object of the Session class."
@@ -436,8 +436,8 @@ type Mutation {
     createUser(input: CreateUserInput!): CreateUserPayload
     "The deleteBasket mutation can be used to delete an object of the Basket class."
     deleteBasket(input: DeleteBasketInput!): DeleteBasketPayload
-    "The deleteBasket_Devices mutation can be used to delete an object of the Basket_Devices class."
-    deleteBasket_Devices(input: DeleteBasket_DevicesInput!): DeleteBasket_DevicesPayload
+    "The deleteBasket_Device mutation can be used to delete an object of the Basket_Device class."
+    deleteBasket_Device(input: DeleteBasket_DeviceInput!): DeleteBasket_DevicePayload
     "The deleteBrand mutation can be used to delete an object of the Brand class."
     deleteBrand(input: DeleteBrandInput!): DeleteBrandPayload
     "The deleteClass mutation can be used to delete an existing object class."
@@ -446,8 +446,8 @@ type Mutation {
     deleteDevice(input: DeleteDeviceInput!): DeleteDevicePayload
     "The deleteDevice_info mutation can be used to delete an object of the Device_info class."
     deleteDevice_info(input: DeleteDevice_infoInput!): DeleteDevice_infoPayload
-    "The deleteRatings mutation can be used to delete an object of the Ratings class."
-    deleteRatings(input: DeleteRatingsInput!): DeleteRatingsPayload
+    "The deleteRating mutation can be used to delete an object of the Rating class."
+    deleteRating(input: DeleteRatingInput!): DeleteRatingPayload
     "The deleteRole mutation can be used to delete an object of the Role class."
     deleteRole(input: DeleteRoleInput!): DeleteRolePayload
     "The deleteSession mutation can be used to delete an object of the Session class."
@@ -470,8 +470,8 @@ type Mutation {
     signUp(input: SignUpInput!): SignUpPayload
     "The updateBasket mutation can be used to update an object of the Basket class."
     updateBasket(input: UpdateBasketInput!): UpdateBasketPayload
-    "The updateBasket_Devices mutation can be used to update an object of the Basket_Devices class."
-    updateBasket_Devices(input: UpdateBasket_DevicesInput!): UpdateBasket_DevicesPayload
+    "The updateBasket_Device mutation can be used to update an object of the Basket_Device class."
+    updateBasket_Device(input: UpdateBasket_DeviceInput!): UpdateBasket_DevicePayload
     "The updateBrand mutation can be used to update an object of the Brand class."
     updateBrand(input: UpdateBrandInput!): UpdateBrandPayload
     "The updateClass mutation can be used to update the schema for an existing object class."
@@ -480,8 +480,8 @@ type Mutation {
     updateDevice(input: UpdateDeviceInput!): UpdateDevicePayload
     "The updateDevice_info mutation can be used to update an object of the Device_info class."
     updateDevice_info(input: UpdateDevice_infoInput!): UpdateDevice_infoPayload
-    "The updateRatings mutation can be used to update an object of the Ratings class."
-    updateRatings(input: UpdateRatingsInput!): UpdateRatingsPayload
+    "The updateRating mutation can be used to update an object of the Rating class."
+    updateRating(input: UpdateRatingInput!): UpdateRatingPayload
     "The updateRole mutation can be used to update an object of the Role class."
     updateRole(input: UpdateRoleInput!): UpdateRolePayload
     "The updateSession mutation can be used to update an object of the Session class."
@@ -521,13 +521,28 @@ type Query {
         "The read options for the query to be executed."
         options: ReadOptionsInput
     ): Basket!
-    "The basket_Devices query can be used to get an object of the Basket_Devices class by its id."
-    basket_Devices(
+    "The basket_Device query can be used to get an object of the Basket_Device class by its id."
+    basket_Device(
         "This is the object id. You can use either the global or the object id."
         id: ID!,
         "The read options for the query to be executed."
         options: ReadOptionsInput
-    ): Basket_Devices!
+    ): Basket_Device!
+    "The basket_Devices query can be used to find objects of the Basket_Device class."
+    basket_Devices(
+        after: String,
+        before: String,
+        first: Int,
+        last: Int,
+        "The read options for the query to be executed."
+        options: ReadOptionsInput,
+        "The fields to be used when sorting the data fetched."
+        order: [Basket_DeviceOrder!],
+        "This is the number of objects that must be skipped to return."
+        skip: Int,
+        "These are the conditions that the objects need to match in order to be found."
+        where: Basket_DeviceWhereInput
+    ): Basket_DeviceConnection!
     "The baskets query can be used to find objects of the Basket class."
     baskets(
         after: String,
@@ -623,13 +638,28 @@ type Query {
         "The ID of an object"
         id: ID!
     ): Node
-    "The ratings query can be used to get an object of the Ratings class by its id."
-    ratings(
+    "The rating query can be used to get an object of the Rating class by its id."
+    rating(
         "This is the object id. You can use either the global or the object id."
         id: ID!,
         "The read options for the query to be executed."
         options: ReadOptionsInput
-    ): Ratings!
+    ): Rating!
+    "The ratings query can be used to find objects of the Rating class."
+    ratings(
+        after: String,
+        before: String,
+        first: Int,
+        last: Int,
+        "The read options for the query to be executed."
+        options: ReadOptionsInput,
+        "The fields to be used when sorting the data fetched."
+        order: [RatingOrder!],
+        "This is the number of objects that must be skipped to return."
+        skip: Int,
+        "These are the conditions that the objects need to match in order to be found."
+        where: RatingWhereInput
+    ): RatingConnection!
     "The role query can be used to get an object of the Role class by its id."
     role(
         "This is the object id. You can use either the global or the object id."
@@ -722,8 +752,8 @@ type Query {
     viewer: Viewer!
 }
 
-"The Ratings object type is used in operations that involve outputting objects of Ratings class."
-type Ratings implements Node & ParseObject {
+"The Rating object type is used in operations that involve outputting objects of Rating class."
+type Rating implements Node & ParseObject {
     ACL: ACL!
     "This is the date in which the object was created."
     createdAt: Date!
@@ -742,21 +772,21 @@ type Ratings implements Node & ParseObject {
 }
 
 "A connection to a list of items."
-type RatingsConnection {
+type RatingConnection {
     "This is the total matched objecs count that is returned when the count flag is set."
     count: Int!
     "A list of edges."
-    edges: [RatingsEdge]
+    edges: [RatingEdge]
     "Information to aid in pagination."
     pageInfo: PageInfo!
 }
 
 "An edge in a connection."
-type RatingsEdge {
+type RatingEdge {
     "A cursor for use in pagination"
     cursor: String!
     "The item at the end of the edge"
-    node: Ratings
+    node: Rating
 }
 
 type ResetPasswordPayload {
@@ -1014,9 +1044,9 @@ type UpdateBasketPayload {
     clientMutationId: String
 }
 
-type UpdateBasket_DevicesPayload {
+type UpdateBasket_DevicePayload {
     "This is the updated object."
-    basket_Devices: Basket_Devices!
+    basket_Device: Basket_Device!
     clientMutationId: String
 }
 
@@ -1044,10 +1074,10 @@ type UpdateDevice_infoPayload {
     device_info: Device_info!
 }
 
-type UpdateRatingsPayload {
+type UpdateRatingPayload {
     clientMutationId: String
     "This is the updated object."
-    ratings: Ratings!
+    rating: Rating!
 }
 
 type UpdateRolePayload {
@@ -1149,12 +1179,10 @@ enum BasketOrder {
     userId_DESC
 }
 
-"The Basket_DevicesOrder input type is used when sorting objects of the Basket_Devices class."
-enum Basket_DevicesOrder {
+"The Basket_DeviceOrder input type is used when sorting objects of the Basket_Device class."
+enum Basket_DeviceOrder {
     ACL_ASC
     ACL_DESC
-    basketId_ASC
-    basketId_DESC
     createdAt_ASC
     createdAt_DESC
     deviceId_ASC
@@ -1165,6 +1193,8 @@ enum Basket_DevicesOrder {
     objectId_DESC
     updatedAt_ASC
     updatedAt_DESC
+    userId_ASC
+    userId_DESC
 }
 
 "The BrandOrder input type is used when sorting objects of the Brand class."
@@ -1229,8 +1259,8 @@ enum Device_infoOrder {
     updatedAt_DESC
 }
 
-"The RatingsOrder input type is used when sorting objects of the Ratings class."
-enum RatingsOrder {
+"The RatingOrder input type is used when sorting objects of the Rating class."
+enum RatingOrder {
     ACL_ASC
     ACL_DESC
     createdAt_ASC
@@ -1454,46 +1484,44 @@ input BasketWhereInput {
     userId: UserRelationWhereInput
 }
 
-"Allow to link OR add and link an object of the Basket_Devices class."
-input Basket_DevicesPointerInput {
-    "Create and link an object from Basket_Devices class."
-    createAndLink: CreateBasket_DevicesFieldsInput
-    "Link an existing object from Basket_Devices class. You can use either the global or the object id."
+"Allow to link OR add and link an object of the Basket_Device class."
+input Basket_DevicePointerInput {
+    "Create and link an object from Basket_Device class."
+    createAndLink: CreateBasket_DeviceFieldsInput
+    "Link an existing object from Basket_Device class. You can use either the global or the object id."
     link: ID
 }
 
-"Allow to add, remove, createAndAdd objects of the Basket_Devices class into a relation field."
-input Basket_DevicesRelationInput {
-    "Add existing objects from the Basket_Devices class into the relation. You can use either the global or the object ids."
+"Allow to add, remove, createAndAdd objects of the Basket_Device class into a relation field."
+input Basket_DeviceRelationInput {
+    "Add existing objects from the Basket_Device class into the relation. You can use either the global or the object ids."
     add: [ID!]
-    "Create and add objects of the Basket_Devices class into the relation."
-    createAndAdd: [CreateBasket_DevicesFieldsInput!]
-    "Remove existing objects from the Basket_Devices class out of the relation. You can use either the global or the object ids."
+    "Create and add objects of the Basket_Device class into the relation."
+    createAndAdd: [CreateBasket_DeviceFieldsInput!]
+    "Remove existing objects from the Basket_Device class out of the relation. You can use either the global or the object ids."
     remove: [ID!]
 }
 
-"The Basket_DevicesRelationWhereInput input type is used in operations that involve filtering objects of Basket_Devices class."
-input Basket_DevicesRelationWhereInput {
+"The Basket_DeviceRelationWhereInput input type is used in operations that involve filtering objects of Basket_Device class."
+input Basket_DeviceRelationWhereInput {
     "Check if the relation/pointer contains objects."
     exists: Boolean
     "Run a relational/pointer query where at least one child object can match."
-    have: Basket_DevicesWhereInput
+    have: Basket_DeviceWhereInput
     "Run an inverted relational/pointer query where at least one child object can match."
-    haveNot: Basket_DevicesWhereInput
+    haveNot: Basket_DeviceWhereInput
 }
 
-"The Basket_DevicesWhereInput input type is used in operations that involve filtering objects of Basket_Devices class."
-input Basket_DevicesWhereInput {
+"The Basket_DeviceWhereInput input type is used in operations that involve filtering objects of Basket_Device class."
+input Basket_DeviceWhereInput {
     "This is the object ACL."
     ACL: ObjectWhereInput
     "This is the AND operator to compound constraints."
-    AND: [Basket_DevicesWhereInput!]
+    AND: [Basket_DeviceWhereInput!]
     "This is the NOR operator to compound constraints."
-    NOR: [Basket_DevicesWhereInput!]
+    NOR: [Basket_DeviceWhereInput!]
     "This is the OR operator to compound constraints."
-    OR: [Basket_DevicesWhereInput!]
-    "This is the object basketId."
-    basketId: BasketRelationWhereInput
+    OR: [Basket_DeviceWhereInput!]
     "This is the object createdAt."
     createdAt: DateWhereInput
     "This is the object deviceId."
@@ -1504,6 +1532,8 @@ input Basket_DevicesWhereInput {
     objectId: IdWhereInput
     "This is the object updatedAt."
     updatedAt: DateWhereInput
+    "This is the object userId."
+    userId: UserRelationWhereInput
 }
 
 "The BooleanWhereInput input type is used in operations that involve filtering objects by a field of type Boolean."
@@ -1625,19 +1655,19 @@ input CreateBasketInput {
     fields: CreateBasketFieldsInput
 }
 
-"The CreateBasket_DevicesFieldsInput input type is used in operations that involve creation of objects in the Basket_Devices class."
-input CreateBasket_DevicesFieldsInput {
+"The CreateBasket_DeviceFieldsInput input type is used in operations that involve creation of objects in the Basket_Device class."
+input CreateBasket_DeviceFieldsInput {
     ACL: ACLInput
-    "This is the object basketId."
-    basketId: BasketPointerInput!
     "This is the object deviceId."
-    deviceId: DevicePointerInput!
+    deviceId: DevicePointerInput
+    "This is the object userId."
+    userId: UserPointerInput
 }
 
-input CreateBasket_DevicesInput {
+input CreateBasket_DeviceInput {
     clientMutationId: String
     "These are the fields that will be used to create the new object."
-    fields: CreateBasket_DevicesFieldsInput
+    fields: CreateBasket_DeviceFieldsInput
 }
 
 "The CreateBrandFieldsInput input type is used in operations that involve creation of objects in the Brand class."
@@ -1707,8 +1737,8 @@ input CreateFileInput {
     upload: Upload!
 }
 
-"The CreateRatingsFieldsInput input type is used in operations that involve creation of objects in the Ratings class."
-input CreateRatingsFieldsInput {
+"The CreateRatingFieldsInput input type is used in operations that involve creation of objects in the Rating class."
+input CreateRatingFieldsInput {
     ACL: ACLInput
     "This is the object deviceId."
     deviceId: DevicePointerInput!
@@ -1718,10 +1748,10 @@ input CreateRatingsFieldsInput {
     userId: UserPointerInput!
 }
 
-input CreateRatingsInput {
+input CreateRatingInput {
     clientMutationId: String
     "These are the fields that will be used to create the new object."
-    fields: CreateRatingsFieldsInput
+    fields: CreateRatingFieldsInput
 }
 
 "The CreateRoleFieldsInput input type is used in operations that involve creation of objects in the Role class."
@@ -1832,7 +1862,7 @@ input DeleteBasketInput {
     id: ID!
 }
 
-input DeleteBasket_DevicesInput {
+input DeleteBasket_DeviceInput {
     clientMutationId: String
     "This is the object id. You can use either the global or the object id."
     id: ID!
@@ -1862,7 +1892,7 @@ input DeleteDevice_infoInput {
     id: ID!
 }
 
-input DeleteRatingsInput {
+input DeleteRatingInput {
     clientMutationId: String
     "This is the object id. You can use either the global or the object id."
     id: ID!
@@ -2215,44 +2245,44 @@ input PublicACLInput {
     write: Boolean!
 }
 
-"Allow to link OR add and link an object of the Ratings class."
-input RatingsPointerInput {
-    "Create and link an object from Ratings class."
-    createAndLink: CreateRatingsFieldsInput
-    "Link an existing object from Ratings class. You can use either the global or the object id."
+"Allow to link OR add and link an object of the Rating class."
+input RatingPointerInput {
+    "Create and link an object from Rating class."
+    createAndLink: CreateRatingFieldsInput
+    "Link an existing object from Rating class. You can use either the global or the object id."
     link: ID
 }
 
-"Allow to add, remove, createAndAdd objects of the Ratings class into a relation field."
-input RatingsRelationInput {
-    "Add existing objects from the Ratings class into the relation. You can use either the global or the object ids."
+"Allow to add, remove, createAndAdd objects of the Rating class into a relation field."
+input RatingRelationInput {
+    "Add existing objects from the Rating class into the relation. You can use either the global or the object ids."
     add: [ID!]
-    "Create and add objects of the Ratings class into the relation."
-    createAndAdd: [CreateRatingsFieldsInput!]
-    "Remove existing objects from the Ratings class out of the relation. You can use either the global or the object ids."
+    "Create and add objects of the Rating class into the relation."
+    createAndAdd: [CreateRatingFieldsInput!]
+    "Remove existing objects from the Rating class out of the relation. You can use either the global or the object ids."
     remove: [ID!]
 }
 
-"The RatingsRelationWhereInput input type is used in operations that involve filtering objects of Ratings class."
-input RatingsRelationWhereInput {
+"The RatingRelationWhereInput input type is used in operations that involve filtering objects of Rating class."
+input RatingRelationWhereInput {
     "Check if the relation/pointer contains objects."
     exists: Boolean
     "Run a relational/pointer query where at least one child object can match."
-    have: RatingsWhereInput
+    have: RatingWhereInput
     "Run an inverted relational/pointer query where at least one child object can match."
-    haveNot: RatingsWhereInput
+    haveNot: RatingWhereInput
 }
 
-"The RatingsWhereInput input type is used in operations that involve filtering objects of Ratings class."
-input RatingsWhereInput {
+"The RatingWhereInput input type is used in operations that involve filtering objects of Rating class."
+input RatingWhereInput {
     "This is the object ACL."
     ACL: ObjectWhereInput
     "This is the AND operator to compound constraints."
-    AND: [RatingsWhereInput!]
+    AND: [RatingWhereInput!]
     "This is the NOR operator to compound constraints."
-    NOR: [RatingsWhereInput!]
+    NOR: [RatingWhereInput!]
     "This is the OR operator to compound constraints."
-    OR: [RatingsWhereInput!]
+    OR: [RatingWhereInput!]
     "This is the object createdAt."
     createdAt: DateWhereInput
     "This is the object deviceId."
@@ -2653,19 +2683,19 @@ input UpdateBasketInput {
     id: ID!
 }
 
-"The UpdateBasket_DevicesFieldsInput input type is used in operations that involve creation of objects in the Basket_Devices class."
-input UpdateBasket_DevicesFieldsInput {
+"The UpdateBasket_DeviceFieldsInput input type is used in operations that involve creation of objects in the Basket_Device class."
+input UpdateBasket_DeviceFieldsInput {
     ACL: ACLInput
-    "This is the object basketId."
-    basketId: BasketPointerInput
     "This is the object deviceId."
     deviceId: DevicePointerInput
+    "This is the object userId."
+    userId: UserPointerInput
 }
 
-input UpdateBasket_DevicesInput {
+input UpdateBasket_DeviceInput {
     clientMutationId: String
     "These are the fields that will be used to update the object."
-    fields: UpdateBasket_DevicesFieldsInput
+    fields: UpdateBasket_DeviceFieldsInput
     "This is the object id. You can use either the global or the object id."
     id: ID!
 }
@@ -2737,8 +2767,8 @@ input UpdateDevice_infoInput {
     id: ID!
 }
 
-"The UpdateRatingsFieldsInput input type is used in operations that involve creation of objects in the Ratings class."
-input UpdateRatingsFieldsInput {
+"The UpdateRatingFieldsInput input type is used in operations that involve creation of objects in the Rating class."
+input UpdateRatingFieldsInput {
     ACL: ACLInput
     "This is the object deviceId."
     deviceId: DevicePointerInput
@@ -2748,10 +2778,10 @@ input UpdateRatingsFieldsInput {
     userId: UserPointerInput
 }
 
-input UpdateRatingsInput {
+input UpdateRatingInput {
     clientMutationId: String
     "These are the fields that will be used to update the object."
-    fields: UpdateRatingsFieldsInput
+    fields: UpdateRatingFieldsInput
     "This is the object id. You can use either the global or the object id."
     id: ID!
 }

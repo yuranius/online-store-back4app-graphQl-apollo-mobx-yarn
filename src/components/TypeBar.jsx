@@ -5,19 +5,12 @@ import {Context} from "../index";
 import {fetchDevices, fetchTypes} from "../http/deviceAPI";
 
 
-const TypeBar = observer(() => {
+const TypeBar = observer(({loading}) => {
     const {device} = useContext(Context)
 
 
     const selectedType = (id, type) => {
         if (id === device.selectedType.id) {
-
-            // fetchDevices(null, device.selectedBrand.id, device.page, device.limit).then(data => {
-            //     device.setDevices(data.rows)
-            //     device.setTotalCount(data.count)
-            // })
-
-
             device.setSelectedType({})
         } else {
             device.setSelectedType(type)
@@ -27,9 +20,9 @@ const TypeBar = observer(() => {
 
     return (
         <div>
-            <ListGroup style={{cursor: "pointer"}}>
+            <ListGroup style={{cursor: "pointer"}} >
                 {device.types?.map(type =>
-                    <ListGroup.Item key={type.id}
+                    <ListGroup.Item disabled={loading} key={type.id}
                                     onClick={(e) => selectedType(type.id, type)}
                                     active={type.id === device.selectedType.id}
                     >{type.name}

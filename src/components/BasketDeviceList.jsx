@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {observer} from "mobx-react-lite";
-import {Badge, Button, Image, ListGroup, Row} from "react-bootstrap";
+import { Button, ListGroup} from "react-bootstrap";
 import BasketDeviceItem from "./BasketDeviceItem";
 import {priceFormatter} from "../utils/formatter";
 

@@ -19,7 +19,7 @@ const App = observer(() => {
 	useEffect( () => {
 		if (data) {
 			user.setUser({
-				id: data.viewer.user.id,
+				id: data.viewer.user.objectId,
 				email: data.viewer.user.username,
 				role: data.viewer.user.role
 			})

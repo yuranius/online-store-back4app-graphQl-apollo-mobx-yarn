@@ -2,20 +2,22 @@ import React, {useContext, useEffect, useState} from 'react';
 import {Col, Container, Row} from "react-bootstrap";
 import {Context} from "../index";
 import {observer} from "mobx-react-lite";
-import {fetchBasketDevice} from "../http/basketAPI";
 import BasketDeviceList from "../components/BasketDeviceList";
-
+import {useGetBasketDevice} from "../hooks/useGetBasketDevice";
 
 const Basket = observer(() => {
     const [totalPrice, setTotalPrice] = useState(0)
     const {user} = useContext(Context)
     const {basket} = useContext(Context)
 
-    useEffect(() => {
+
+    const {fetchDeviceBasket} = useGetBasketDevice()
+
+    useEffect( () => {
         if (!!user.user.id) {
-            fetchBasketDevice(user.user.id).then(data => basket.setBasketDevices(data))
+            fetchDeviceBasket(user.user.id)
         }
-    }, []);
+    }, [])
 
 
     useEffect(() => {

@@ -5,6 +5,8 @@ import Toasts from "../Custom/Toasts";
 import {Context} from "../../index";
 import {useParams} from "react-router-dom";
 import {observer} from "mobx-react-lite";
+import {useMutation} from "@apollo/client";
+import {ADD_RATE} from "../../query/ratingAPI";
 
 
 const CreateRating = observer(({
@@ -55,6 +57,8 @@ const CreateRating = observer(({
             })
     }
 
+
+    const [] = useMutation(ADD_RATE)
 
 
     const ratingHandler = async () => {

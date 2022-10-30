@@ -10,14 +10,15 @@ import {useState} from "react";
 
 export const useGetDevices = () => {
 
-	const [getAllDevices] = useLazyQuery(FETCH_DEVICES);
-	const [getDevicesType] = useLazyQuery(FETCH_DEVICES_WHEN_TYPE)
-	const [getDevicesBrand] = useLazyQuery(FETCH_DEVICES_WHEN_BRAND)
-	const [getDevicesBrandAndType] = useLazyQuery(FETCH_DEVICES_WHEN_BRAND_AND_TYPE)
+	const [getAllDevices, {loading: loadingAll}] = useLazyQuery(FETCH_DEVICES);
+	const [getDevicesType, {loading: loadingType}] = useLazyQuery(FETCH_DEVICES_WHEN_TYPE)
+	const [getDevicesBrand, {loading: loadingBrand}] = useLazyQuery(FETCH_DEVICES_WHEN_BRAND)
+	const [getDevicesBrandAndType, {loading: loadingBrandAndType}] = useLazyQuery(FETCH_DEVICES_WHEN_BRAND_AND_TYPE)
 
 	const [devices , setDevices] = useState([])
-	const [loading, setLoading] = useState(false)
 
+	let loading = loadingAll || loadingType || loadingBrand || loadingBrandAndType
+	
 	function fetchDevice ({limit, skip, typeId, brandId}) {
 		switch (true) {
 			case (!!typeId && !brandId):
@@ -60,7 +61,7 @@ export const useGetDevices = () => {
 					}
 				}).then(res => {
 					setDevices(res.data.devices)
-					setLoading(res.loading)}
+					}
 				)
 				break
 		}

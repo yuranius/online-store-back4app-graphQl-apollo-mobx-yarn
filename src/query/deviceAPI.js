@@ -248,17 +248,3 @@ export const GET_DEVICE = gql`
     }
 `
 
-// query {
-//     devices (first: 5, skip:0, where: {brandId:{have: {objectId: {
-//         equalTo: "sVbUT70Da5"
-//     }}}, typeId:{have: {objectId: {
-//         equalTo: "ClPXMDrkj7" }}}}) {
-//         count
-//         edges {
-//             node{
-//                 name
-//                 price
-//             }
-//         }
-//     }
-// }

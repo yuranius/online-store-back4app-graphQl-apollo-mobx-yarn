@@ -7,15 +7,14 @@ import CreateRating from "../components/Modals/CreateRating";
 import Toasts from "../components/Custom/Toasts";
 import {Context} from "../index";
 import {observer} from "mobx-react-lite";
-import {addDeviceBasket} from "../http/basketAPI";
 import editIcon from '../images/edit.png'
 import deleteIcon from '../images/delete.png'
 import {SHOP_ROUTE} from "../utils/consts";
 import {useShowMessageToasts} from "../hooks/useMassage";
 import {priceFormatter} from "../utils/formatter";
-import {useQuery} from "@apollo/client";
+import {useLazyQuery, useMutation, useQuery} from "@apollo/client";
 import {GET_DEVICE} from "../query/deviceAPI";
-
+import {ADD_DEVICE_BASKET, CHECK_DEVICE_BASKET} from "../query/basketAPI";
 
 const DevicePage = observer(() => {
     const [device, setDevice] = useState({info: []})
@@ -28,16 +27,32 @@ const DevicePage = observer(() => {
     const {user} = useContext(Context)
     const {basket} = useContext(Context)
 
+    const [addDeviceBasket] = useMutation(ADD_DEVICE_BASKET, {
+        variables: {
+            userId: user.user.id,
+            deviceId: device.id,
+        }
+    })
+
+    const [checkDeviceBasket, {refetch}] = useLazyQuery(CHECK_DEVICE_BASKET, {
+        variables: {
+            userId: user.user.id,
+            deviceId: device.id,
+        }
+    })
+
     const navigate = useNavigate()
 
     // id из адресной строки
     const {id} = useParams()
 
-    const { data } = useQuery(GET_DEVICE, {
-        variables : {
+    const {data} = useQuery(GET_DEVICE, {
+        variables: {
             id
         }
     })
+
+    
 
     useEffect(() => {
         setDevice({
@@ -60,7 +75,7 @@ const DevicePage = observer(() => {
     }, [device.id, ratingVisible, user])
 
     const voteHandler = () => {
-        if (user.isAuth && !rating.id) {
+        if (user.isAuth && !rating?.id) {
             // модальное окно с вводом ретинга
             setTypeRatingVisible('addRating')
             setRatingVisible(true)
@@ -71,19 +86,23 @@ const DevicePage = observer(() => {
         }
     }
 
-
     const addBasket = async () => {
         if (user.isAuth) {
+            await refetch()
             try {
-                await addDeviceBasket({
-                    deviceId: device.id,
-                    userId: user.user.id
-                }).then(data => {
-                    showSuccess(`Товар ${device.name} добавлен в корзину`)
-                    basket.addQuantityDevices()
-                })
+                await checkDeviceBasket().then((t) => {
+                        if (!t.data.basket_Devices.edges.length) {
+                            addDeviceBasket().then(res => {
+                                showSuccess(`Товар ${device.name} добавлен в корзину`)
+                                basket.addQuantityDevices()
+                            })
+                        } else {
+                            showWarning('Товар уже есть в корзине...')
+                        }
+                    }
+                )
             } catch (error) {
-                showWarning(error.response.data.message)
+                showWarning(error.message)
             }
         } else {
             showWarning('Авторизируйтесь для добавления товара в корзину...')
@@ -147,7 +166,7 @@ const DevicePage = observer(() => {
                     </Stack>
                     <div style={{cursor: "pointer"}}
                          className='d-flex align-items-center justify-content-center mt-3'>
-                        <div>{!!rating.id
+                        <div>{!!rating?.id
                             ?
                             <div className='d-flex flex-column align-items-center'>
                                 <div onClick={changeRating}>Ваша оценка - {rating.rate}</div>

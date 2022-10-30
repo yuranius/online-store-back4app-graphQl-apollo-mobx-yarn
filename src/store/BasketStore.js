@@ -14,6 +14,10 @@ class BasketStore {
         this._quantity = this._basket.length
     }
 
+    addDevice (device) {
+        this._basket = [...this._basket, device]
+    }
+
 
     addQuantityDevices () {
         this._quantity ++

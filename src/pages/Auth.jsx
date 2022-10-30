@@ -2,45 +2,50 @@ import React, {useContext, useState} from 'react';
 import {Button, Card, Container, Form} from "react-bootstrap";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import {LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE} from "../utils/consts";
-import {check} from "../http/userApi";
 import {observer} from "mobx-react-lite";
 import Toasts from "../components/Custom/Toasts";
 import {Context} from "../index";
 import Acc from "../components/Custom/Accordion";
 import {useShowMessageToasts} from "../hooks/useMassage";
 import {useMutation} from "@apollo/client";
-import {LOGIN, REGISTRATION} from "../query/authAPI";
+import {CREATE_BASKET, LOGIN, REGISTRATION} from "../query/authAPI";
 
 const Auth = observer(() => {
-			const {user} = useContext(Context)
-			const location = useLocation()
-			const isLogin = location.pathname === LOGIN_ROUTE
+	const {user} = useContext(Context)
+	const location = useLocation()
+	const isLogin = location.pathname === LOGIN_ROUTE
 
-			const [newUser] = useMutation(REGISTRATION)
-			const [auth] = useMutation(LOGIN)
+	const [newUser] = useMutation(REGISTRATION)
+	const [newBasket] = useMutation(CREATE_BASKET)
+	const [auth] = useMutation(LOGIN)
 
-			const addUser = () => {
-				newUser({
+	const addUser = () => {
+		newUser({
+			variables: {
+				email: email,
+				password: password,
+				username: email,
+				role: 'USER',
+			}
+		}).then(user => newBasket({
 					variables: {
-						email: email,
-						password: password,
-						username: email,
-						role: 'USER',
+						userId: user.data.signUp.viewer.user.objectId
 					}
 				})
-			}
+		)
+	}
 
-			const login = () => {
-				auth({
-					variables: {
-						username: email,
-						password: password
-					}
-				}).then( res => {
-							user.setUser({
-								id: res.data.logIn.viewer.user.id,
-								email: res.data.logIn.viewer.user.username,
-								role: res.data.logIn.viewer.user.role
+	const login = () => {
+		auth({
+			variables: {
+				username: email,
+				password: password
+			}
+		}).then(res => {
+					user.setUser({
+						id: res.data.logIn.viewer.user.objectId,
+						email: res.data.logIn.viewer.user.username,
+						role: res.data.logIn.viewer.user.role
 							})
 							localStorage.setItem('token', res.data.logIn.viewer.sessionToken)
 							user.setIsAuth(true)

@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {Button, Container, Nav, Navbar} from "react-bootstrap";
 import {ADMIN_ROUTE, BASKET_ROUTE, LOGIN_ROUTE, SHOP_ROUTE} from "../utils/consts";
 import {NavLink} from "react-router-dom";
@@ -10,11 +10,13 @@ import basketImg from '../images/basket.png'
 
 
 
+
 const NavBar = observer(() => {
     const {user} = useContext(Context)
     const {basket} = useContext(Context)
     const navigate = useNavigate()
 
+    
     const logOut = () => {
         localStorage.clear()
         user.setUser({})
