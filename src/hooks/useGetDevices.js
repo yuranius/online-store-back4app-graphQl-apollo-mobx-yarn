@@ -60,7 +60,7 @@ export const useGetDevices = () => {
 						limit: limit,
 					}
 				}).then(res => {
-					setDevices(res.data.devices)
+					setDevices(res?.data.devices)
 					}
 				)
 				break

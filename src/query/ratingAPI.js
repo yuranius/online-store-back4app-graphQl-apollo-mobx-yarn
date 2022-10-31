@@ -1,8 +1,10 @@
 import {gql} from "@apollo/client";
 
+
+
 export const ADD_RATE = gql`
 	mutation ( $deviceId: ID! $userId: ID! $rate: Float! ) {
-			createRatings(input: {
+			createRating(input: {
 					fields: {
 							deviceId: {
 									link: $deviceId
@@ -13,7 +15,7 @@ export const ADD_RATE = gql`
 							rate: $rate,
 					}
 			}){
-					ratings {
+					rating {
 							objectId
 							userId {
 									objectId
@@ -27,10 +29,36 @@ export const ADD_RATE = gql`
 	}
 `
 
+export const UPDATE_DEVICE = gql`
+	mutation ( $deviceId: ID! $rate: Float) {
+			updateDevice(input: {id: $deviceId, fields: {rating: $rate} }){
+					device {
+							objectId
+							rating
+          }
+			}
+	}
+`
+
+export const CHECK_RATE_USER = gql`
+	query ( $userId: ID! $deviceId: ID! ) {
+			ratings ( where: {userId: {have: {objectId: {equalTo: $userId}}}, 
+					deviceId: {have: {objectId: {equalTo: $deviceId}}}}){
+					count
+					edges {
+							node {
+									objectId
+									rate
+              }
+          }
+			}
+	}
+`
+
 export const CHANGE_RATE = gql`
 	mutation ( $id: ID! $rate: Float! ) {
-			updateRatings(input: {id: $id, fields: {rate: $rate}}){
-					ratings {
+			updateRating(input: {id: $id, fields: {rate: $rate}}){
+					rating {
               objectId
               userId {
                   objectId
@@ -46,8 +74,8 @@ export const CHANGE_RATE = gql`
 
 export const DELETE_RATE = gql`
 	mutation ( $id: ID! ) {
-			deleteRatings(input: {id: $id}) {
-          ratings {
+			deleteRating(input: {id: $id}) {
+          rating {
               objectId
               userId {
                   objectId
@@ -74,3 +102,5 @@ export const GET_RATING_DEVICE = gql`
 			}
 	}
 `
+
+

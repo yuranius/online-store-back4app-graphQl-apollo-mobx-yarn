@@ -1,30 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fc0a7de2-ba99-4b5e-8509-1878495e79aa" name="Changes" comment="home initial">
-      <change afterPath="$PROJECT_DIR$/src/hooks/useGetBasketDevice.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/query/basketAPI.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/query/ratingAPI.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/query/yuranius.js" afterDir="false" />
+    <list default="true" id="fc0a7de2-ba99-4b5e-8509-1878495e79aa" name="Changes" comment="home">
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project_schema.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/project_schema.graphql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/BasketDeviceItem.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BasketDeviceItem.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/BasketDeviceList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BasketDeviceList.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/BrandBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BrandBar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/DeviceList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DeviceList.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Modals/CreateBrand.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Modals/CreateBrand.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Modals/CreateDevice.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Modals/CreateDevice.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Modals/CreateRating.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Modals/CreateRating.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Modals/CreateType.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Modals/CreateType.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/TypeBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TypeBar.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hooks/useGetDevices.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/useGetDevices.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Auth.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Auth.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Basket.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Basket.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/http/basketAPI.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/http/deviceAPI.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/http/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/http/userApi.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/DevicePage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/DevicePage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Shop.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Shop.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/query/authAPI.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/query/authAPI.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/query/deviceAPI.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/query/deviceAPI.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/BasketStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/BasketStore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/query/ratingAPI.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/query/ratingAPI.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/query/yuranius.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/query/example_cache.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,8 +37,8 @@
     <option name="autoscrollToSource" value="true" />
     <option name="compactDirectories" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
     <option name="sortByType" value="true" />
   </component>
   <component name="PropertiesComponent">{
@@ -53,19 +46,20 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/mnt/F03E074F3E070DF2/WEB-DEVELOPMENT/Progect/-=ReactJS=-/online-store-back4app-graphQl-apollo-mobx-yarn/src/query&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/mnt/F03E074F3E070DF2/WEB-DEVELOPMENT/Progect/-=ReactJS=-/online-store-back4app-graphQl-apollo-mobx-yarn/src/hooks&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;JavaScript.Libraries&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\WebStorm 2022.1.3\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editing.templates&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/yuranius/WebStorm-221.5921.27/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/hooks" />
       <recent name="$PROJECT_DIR$/src/query" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -91,8 +85,9 @@
       <workItem from="1666538019851" duration="11574000" />
       <workItem from="1666625543250" duration="8152000" />
       <workItem from="1666720962170" duration="3223000" />
-      <workItem from="1667070769139" duration="10000" />
-      <workItem from="1667111342665" duration="2794000" />
+      <workItem from="1666884586471" duration="12781000" />
+      <workItem from="1667147707023" duration="6421000" />
+      <workItem from="1667229923445" duration="4876000" />
     </task>
     <task id="LOCAL-00001" summary="home initial">
       <created>1666550306561</created>
@@ -101,7 +96,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666550306561</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="home">
+      <created>1666809695933</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1666809695934</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

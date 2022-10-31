@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {observer} from "mobx-react-lite";
 import {Card, Col, Row} from "react-bootstrap";
 import {Context} from "../index";
-import {fetchDevices} from "../http/deviceAPI";
+
 
 const BrandBar = observer(({loading}) => {
     const {device} = useContext(Context)

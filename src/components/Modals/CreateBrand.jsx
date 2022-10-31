@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {Button, Form, Modal} from "react-bootstrap";
-import {createBrand} from "../../http/deviceAPI";
 import {useMutation, useQuery} from "@apollo/client";
 import {CREATE_BRAND, FETCH_TYPES_BRANDS,} from "../../query/deviceAPI";
 

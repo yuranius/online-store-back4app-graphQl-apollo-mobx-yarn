@@ -1,19 +1,10 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {Button, Col, Dropdown, Form, Modal, Row} from "react-bootstrap";
 import {Context} from "../../index";
-import {createDevice, fetchBrands, fetchTypes} from "../../http/deviceAPI";
 import {observer} from "mobx-react-lite";
 import Toasts from "../Custom/Toasts";
 import {useMutation, useQuery} from "@apollo/client";
-import {
-    CREATE_DEVICE,
-    CREATE_FILE,
-    CREATE_INFO,
-    FETCH_TYPES_BRANDS,
-} from "../../query/deviceAPI";
-import {parseFile} from "../../query/parseFile";
-
-
+import {CREATE_DEVICE, CREATE_FILE, CREATE_INFO, FETCH_TYPES_BRANDS,} from "../../query/deviceAPI";
 
 const CreateDevice = observer(({show,onHide}) => {
     const {device} = useContext(Context)
