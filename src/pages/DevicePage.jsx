@@ -11,11 +11,10 @@ import deleteIcon from '../images/delete.png'
 import {SHOP_ROUTE} from "../utils/consts";
 import {useShowMessageToasts} from "../hooks/useMassage";
 import {priceFormatter} from "../utils/formatter";
-import {useLazyQuery, useMutation, useQuery} from "@apollo/client";
+import {useLazyQuery, useMutation} from "@apollo/client";
 import {GET_DEVICE} from "../query/deviceAPI";
 import {ADD_DEVICE_BASKET, CHECK_DEVICE_BASKET} from "../query/basketAPI";
-import {CHECK_RATE_USER} from "../query/ratingAPI";
-import data from "bootstrap/js/src/dom/data";
+import {CHECK_RATE_USER, DELETE_RATE, GET_RATING_DEVICE, UPDATE_DEVICE} from "../query/ratingAPI";
 
 const DevicePage = observer(() => {
 	const [device, setDevice] = useState({info: []})
@@ -28,40 +27,54 @@ const DevicePage = observer(() => {
 	const {user} = useContext(Context)
 	const {basket} = useContext(Context)
 
+	// id из адресной строки
+	const {id} = useParams()
+
 	const [addDeviceBasket] = useMutation(ADD_DEVICE_BASKET, {
 		variables: {
 			userId: user.user.id,
-			deviceId: device.id,
+			deviceId: id,
 		}
 	})
 
 	const [checkDeviceBasket, {refetch}] = useLazyQuery(CHECK_DEVICE_BASKET, {
 		variables: {
 			userId: user.user.id,
-			deviceId: device.id,
+			deviceId: id,
+		}
+	})
+	
+	const [deleteRatingDevice] = useMutation(DELETE_RATE, {
+		variables:{
+			id: rating.id
 		}
 	})
 
-	const [checkRateDevice] = useLazyQuery(CHECK_RATE_USER)
+	const [getRatingDevice] = useLazyQuery(GET_RATING_DEVICE, {
+		variables: {
+			deviceId: id,
+		}
+	})
 
+	const [updateDevice] = useMutation(UPDATE_DEVICE)
+
+	const [checkRateDevice] = useLazyQuery(CHECK_RATE_USER)
 
 	const navigate = useNavigate()
 
-	// id из адресной строки
-	const {id} = useParams()
+
 
 	const [getDevice] = useLazyQuery(GET_DEVICE, {
 		variables: {
 			id
 		},
-		fetchPolicy:'cache-and-network',
+		fetchPolicy: 'cache-and-network',
 	})
-	
-	console.log( '📌:rating',rating,'🌴 🏁')
-	
+
+	console.log('📌:rating', rating, '🌴 🏁')
 
 	useEffect(() => {
-		getDevice().then( ({data}) => {
+		getDevice().then(({data}) => {
 			setDevice({
 				id: data?.device.objectId,
 				info: data?.device_infos.edges || [],
@@ -73,28 +86,21 @@ const DevicePage = observer(() => {
 				typeId: data?.device.typeId.objectId,
 			})
 		})
-	}, [rating, id, device.id ])
-
-
-
+	}, [rating, id, device.id])
 
 	useEffect(() => {
-		if (!!user.user.id && !!device.id){
-			
-			console.log( '📌:','checkRateDevice','🌴 🏁')
-			
-			console.log( '📌:',user.user.id, device.id,'🌴 🏁')
-			
-			
-		checkRateDevice({
-			variables: {
-				userId: user.user.id,
-				deviceId: device.id
-			}, fetchPolicy: 'cache-and-network'}
-		).then( ({data}) => setRating({
-			id: data?.ratings?.edges[0]?.node.objectId,
-			rate: data?.ratings?.edges[0]?.node.rate
-		}))}
+		if (!!user.user.id && !!device.id) {
+			checkRateDevice({
+						variables: {
+							userId: user.user.id,
+							deviceId: device.id
+						}, fetchPolicy: 'cache-and-network'
+					}
+			).then(({data}) => setRating({
+				id: data?.ratings?.edges[0]?.node.objectId,
+				rate: data?.ratings?.edges[0]?.node.rate
+			}))
+		}
 	}, [device.id, ratingVisible, user])
 
 	const voteHandler = () => {
@@ -132,7 +138,6 @@ const DevicePage = observer(() => {
 		}
 	}
 
-
 	const showToastsCreateRating = (message) => {
 		showSuccess(message)
 	}
@@ -147,12 +152,24 @@ const DevicePage = observer(() => {
 	}
 
 	const deleteRating = () => {
+
 		// deleteRatingDevice(rating.id).then(data => {
 		// 			setTypeRatingVisible('')
 		// 			fetchOneDevices(id).then(data => setDevice(data))
 		// 			fetchRatingDevice({userId: user.user.id, deviceId: id}).then(data => setRating(data))
 		// 		}
 		// )
+
+		deleteRatingDevice().then(res => {
+			getRatingDevice().then(({data}) => {
+				let quantity = data.ratings.count
+				const sumRate = data.ratings.edges.map(({node}) => node.rate).reduce((sum, a) => sum + a, 0)
+				console.log( '📌:',quantity, sumRate,'🌴 🏁')
+				
+				updateDevice({variables: {deviceId: id, rate: (!!quantity ? (sumRate / quantity) : 0)}}).then( up => console.log( '📌:',up,'🌴 🏁')
+				)
+			})
+		})
 	}
 
 	const deleteHandler = () => {

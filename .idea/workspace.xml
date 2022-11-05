@@ -2,22 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc0a7de2-ba99-4b5e-8509-1878495e79aa" name="Changes" comment="home">
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/BrandBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BrandBar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Modals/CreateBrand.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Modals/CreateBrand.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Modals/CreateDevice.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Modals/CreateDevice.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Modals/CreateRating.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Modals/CreateRating.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Modals/CreateType.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Modals/CreateType.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/TypeBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TypeBar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks/useGetDevices.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/useGetDevices.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/http/basketAPI.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/http/deviceAPI.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/http/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/http/userApi.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/DevicePage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/DevicePage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/query/ratingAPI.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/query/ratingAPI.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/query/yuranius.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/query/example_cache.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +75,10 @@
       <workItem from="1666720962170" duration="3223000" />
       <workItem from="1666884586471" duration="12781000" />
       <workItem from="1667147707023" duration="6421000" />
-      <workItem from="1667229923445" duration="4876000" />
+      <workItem from="1667229923445" duration="5047000" />
+      <workItem from="1667411307956" duration="511000" />
+      <workItem from="1667580995927" duration="5016000" />
+      <workItem from="1667631073995" duration="1004000" />
     </task>
     <task id="LOCAL-00001" summary="home initial">
       <created>1666550306561</created>
@@ -103,7 +94,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666809695934</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="home">
+      <created>1667240759155</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1667240759155</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

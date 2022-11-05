@@ -1,12 +1,11 @@
-import React, {useContext, useEffect, useRef, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {Button, Form, Modal} from "react-bootstrap";
 import Toasts from "../Custom/Toasts";
 import {Context} from "../../index";
 import {useParams} from "react-router-dom";
 import {observer} from "mobx-react-lite";
-import {useLazyQuery, useMutation, useQuery} from "@apollo/client";
-import {ADD_RATE, CHECK_RATE_USER, GET_RATING_DEVICE, UPDATE_DEVICE} from "../../query/ratingAPI";
-import {GET_DEVICE} from "../../query/deviceAPI";
+import {useLazyQuery, useMutation} from "@apollo/client";
+import {ADD_RATE, CHANGE_RATE, CHECK_RATE_USER, GET_RATING_DEVICE, UPDATE_DEVICE} from "../../query/ratingAPI";
 
 const CreateRating = observer(({
 	                               show,
@@ -43,6 +42,9 @@ const CreateRating = observer(({
 		}
 	}
 
+	// ? await ratingDevice(addRatingDevice)
+	//
+	// : await ratingDevice(changeRatingDevice)
 	function ratingDevice(nameFunction) {
 		nameFunction({rate: value, userId: user.user.id, deviceId: id})
 				.then(data => {
@@ -65,6 +67,13 @@ const CreateRating = observer(({
 		}
 	})
 
+	const [changeRatingDevice] = useMutation(CHANGE_RATE, {
+		variables: {
+			id: rating.id,
+			rate: +value,
+		}
+	})
+
 	const [checkRatingUserDevice] = useLazyQuery(CHECK_RATE_USER, {
 		variables: {
 			userId: user.user.id,
@@ -72,17 +81,15 @@ const CreateRating = observer(({
 		},
 		fetchPolicy: 'cache-and-network'
 	})
-	
-	
+
 	const [getRatingDevice] = useLazyQuery(GET_RATING_DEVICE, {
-		variables:{
+		variables: {
 			deviceId: id,
-		}
+		},
+		fetchPolicy: 'cache-and-network'
 	})
 
-
 	const [updateDevice] = useMutation(UPDATE_DEVICE)
-
 
 	const [checkRateDevice] = useLazyQuery(CHECK_RATE_USER, {
 		variables: {
@@ -117,32 +124,43 @@ const CreateRating = observer(({
 			return setMessage('Введите значение в дипазоне от 1 до 5')
 		}
 		try {
-			// {
-			// 	typeRatingVisible === 'addRating'
-			// 			? await ratingDevice(addRatingDevice)
-			// 			: await ratingDevice(changeRatingDevice)
-			// }
+			{
+				typeRatingVisible === 'addRating'
+						? (checkRatingUserDevice().then(({data}) => {
+									if (!data.ratings.count) {
+										addRatingDevice().then(res => {
+											getRatingDevice().then(({data}) => {
+												let quantity = data.ratings.count
+												const sumRate = data.ratings.edges.map(({node}) => node.rate).reduce((sum, a) => sum + a, 0)
+												updateDevice({variables: {deviceId: id, rate: sumRate / quantity}})
+											})
+											showToastsCreateRating('Ваш голос учтен...')
+											setValue('')
+											onHide()
+										})
+									} else {
+										showToastsErrorCreateRating('Ваш голос уже учтен...')
+										setValue('')
+										onHide()
+									}
+								})
+						)
+						: (
+								changeRatingDevice().then(res => {
+									console.log( '📌:',res,'🌴 🏁')
+											getRatingDevice().then(({data}) => {
+												let quantity = data.ratings.count
+												const sumRate = data.ratings.edges.map(({node}) => node.rate).reduce((sum, a) => sum + a, 0)
+												updateDevice({variables: {deviceId: id, rate: sumRate / quantity}})
+											})
+											showToastsCreateRating('Ваш голос учтен...')
+											setValue('')
+											onHide()
+										}
+								))
+			}
 
-			checkRatingUserDevice().then(({data}) => {
-				if (!data.ratings.count) {
-					addRatingDevice().then(res => {
-						getRatingDevice().then( ({data}) => {
-							let quantity = data.ratings.count
-							const sumRate = data.ratings.edges.map( ({ node }) =>  node.rate ).reduce((sum, a) => sum + a, 0)
-							updateDevice({variables: {deviceId: id, rate: sumRate / quantity}})
-						})
-						showToastsCreateRating('Ваш голос учтен...')
-						setValue('')
-						onHide()
-					})
-				} else {
-					showToastsErrorCreateRating('Ваш голос уже учтен...')
-					setValue('')
-					onHide()
-				}
-			})
-
-			checkRateDevice().then( ({data}) => setRating({
+			checkRateDevice().then(({data}) => setRating({
 				id: data?.ratings?.edges[0]?.node.objectId,
 				rate: data?.ratings?.edges[0]?.node.rate
 			}))
