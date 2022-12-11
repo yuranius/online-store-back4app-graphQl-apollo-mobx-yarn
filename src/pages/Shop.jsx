@@ -16,6 +16,7 @@ const Shop = observer(() => {
 	const {user} = useContext(Context)
 	const {basket} = useContext(Context)
 
+	
 	const {data: typesAndBrands} = useQuery(FETCH_TYPES_BRANDS)
 
 	const {fetchDeviceBasket} = useGetBasketDevice()
